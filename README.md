@@ -5,10 +5,10 @@ Project is created for practice and learning test automation, covering common us
 This repository contains UI test automation examples for the AutomationExercise demo website, implemented using Python, Selenium WebDriver, and PyTest.
 The goal of this project is to practice automation testing concepts, including:
 
-Page Object Model (POM)
-Test structure with PyTest
-Dynamic test data (e.g. unique emails)
-Assertions and basic validations
+Page Object Model (POM),
+Test structure with PyTest,
+Dynamic test data (e.g. unique emails),
+Assertions and basic validations,
 Clean and reusable test code
 
 
