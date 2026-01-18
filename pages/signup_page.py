@@ -23,6 +23,7 @@ class SignupPage(BasePage):
     LOGIN_EMAIL = (By.XPATH, "//input[@data-qa='login-email']")
     LOGIN_PASSWORD = (By.XPATH, "//input[@data-qa='login-password']")
     LOGIN_BUTTON = (By.XPATH, "//button[@data-qa='login-button']")
+    ERROR_MESSAGE = (By.XPATH, "//p[text()='Your email or password is incorrect!']")
     
 
     def is_new_user_signup_visible(self):
@@ -46,3 +47,5 @@ class SignupPage(BasePage):
         self.driver.find_element(*self.LOGIN_BUTTON).click()
 
     
+    def is_error_message_visible(self):
+        return self.driver.find_element(*self.ERROR_MESSAGE).is_displayed()

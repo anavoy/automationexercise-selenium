@@ -20,7 +20,8 @@ def test_login_user(driver):
     # 2. Navigate to Signup/Login page
     home.click_signup_login()
     assert signup.is_login_title_visible(), "'Login to your account' title is not visible"
-
+    
+    # temporarily
      # 3. Login
     signup.login(
         email="testJovana@gmail.com",
