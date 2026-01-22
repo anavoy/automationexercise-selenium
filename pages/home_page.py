@@ -19,6 +19,10 @@ class HomePage(BasePage):
     CONTACT_US_SUCCESS_MESSAGE = (By.XPATH, "//div[@class='status alert alert-success']")
     CONTACT_US_BUTTON_HOME = (By.LINK_TEXT, "Home")
 
+
+    TEST_CASES_BUTTON = (By.LINK_TEXT, "Test Cases")
+    TEST_CASES_TITLE = (By.XPATH, "//h2[contains(text(),'Test Cases')]")
+
     def is_home_page_visible(self):
         return "Automation Exercise" in self.get_title()
 
@@ -47,4 +51,13 @@ class HomePage(BasePage):
 
     def click_contact_us_home(self):
         self.driver.find_element(*self.CONTACT_US_BUTTON_HOME).click()
-   
+
+    def click_test_cases(self):
+        element = self.driver.find_element(*self.TEST_CASES_BUTTON)
+        self.driver.execute_script("arguments[0].click();", element)
+
+    def is_test_cases_page_visible(self):
+        WebDriverWait(self.driver, 20).until(
+        lambda d: "/test_cases" in d.current_url
+    )
+        return True
