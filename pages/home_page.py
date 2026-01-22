@@ -13,6 +13,7 @@ class HomePage(BasePage):
     SIGNUP_BUTTON = (By.LINK_TEXT, "Signup / Login")
     LOGGED_IN_TEXT = (By.CSS_SELECTOR, "a > i.fa-user")
     DELETE_ACCOUNT_BUTTON = (By.XPATH, "//a[@href='/delete_account']")
+    LOGOUT_BUTTON = (By.LINK_TEXT, "Logout")
 
     def is_home_page_visible(self):
         return "Automation Exercise" in self.get_title()
@@ -27,3 +28,7 @@ class HomePage(BasePage):
     
     def click_delete_account(self):
         self.wait.until(EC.element_to_be_clickable(self.DELETE_ACCOUNT_BUTTON)).click()
+
+
+    def click_logout(self):
+        self.wait.until(EC.element_to_be_clickable(self.LOGOUT_BUTTON)).click()
