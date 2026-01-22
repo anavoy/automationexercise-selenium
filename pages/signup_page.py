@@ -16,6 +16,7 @@ class SignupPage(BasePage):
     NAME_INPUT = (By.NAME, "name")
     EMAIL_INPUT = (By.XPATH, "//input[@data-qa='signup-email']")
     SIGNUP_BUTTON = (By.XPATH, "//button[@data-qa='signup-button']")
+    EMAIL_EXIST_MESSAGE = (By.XPATH, "//p[text()='Email Address already exist!']")
 
 
     # LOGIN
@@ -49,3 +50,7 @@ class SignupPage(BasePage):
     
     def is_error_message_visible(self):
         return self.driver.find_element(*self.ERROR_MESSAGE).is_displayed()
+    
+
+    def is_email_exist_visible(self):
+        return self.driver.find_element(*self.EMAIL_EXIST_MESSAGE).is_displayed()

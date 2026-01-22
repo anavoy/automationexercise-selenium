@@ -16,7 +16,7 @@ def test_logout_user(driver):
 
     # 2. Click 'Signup / Login' button
     home.click_signup_login()
-    assert signup.is_login_title_visible(), "'Login to your account' title is not visible" 
+    assert signup.is_login_title_visible(), "'Login to your account' title is not visible"
 
     # 3. Login
      # temporarily
