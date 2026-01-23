@@ -22,6 +22,7 @@ class HomePage(BasePage):
 
     TEST_CASES_BUTTON = (By.LINK_TEXT, "Test Cases")
     TEST_CASES_TITLE = (By.XPATH, "//h2[contains(text(),'Test Cases')]")
+    TEST_CASES_TITLES = (By.CSS_SELECTOR,"div.panel-group a")
 
     def is_home_page_visible(self):
         return "Automation Exercise" in self.get_title()
@@ -61,3 +62,15 @@ class HomePage(BasePage):
         lambda d: "/test_cases" in d.current_url
     )
         return True
+    
+    def are_test_case_titles_visible(self, expected_titles: list[str]) -> bool:
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        element =self.driver.find_elements(*self.TEST_CASES_TITLES)
+        text = [el.text.strip() for el in element]
+
+        for title in expected_titles:
+            if title not in text:
+                return False
+        return True
+        
