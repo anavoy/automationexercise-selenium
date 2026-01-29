@@ -20,6 +20,14 @@ class ProductPage(BasePage):
     PRODUCT_AVAILABILITY = (By.XPATH, "//div[@class='product-information']//p/b[contains(text(),'Availability')]")
     PRODUCT_CONDITION = (By.XPATH, "//div[@class='product-information']//p/b[contains(text(),'Condition')]")
     PRODUCT_BRAND = (By.XPATH, "//div[@class='product-information']//p/b[contains(text(),'Brand')]")
+    PRODUCT_SEARCH = (By.ID, "search_product")
+    PRODUCT_SEARCH_BUTTON = (By.ID, "submit_search")
+    SEARCH_PRODUCT_TITLE = (By.XPATH, "//h2[contains(text(),'Searched Products')]")
+    PRODUCT_NAMES = (By.CSS_SELECTOR, ".productinfo p")
+
+
+
+
 
 
 
@@ -83,5 +91,27 @@ class ProductPage(BasePage):
     def is_product_brand_visible(self):
         return self.driver.find_element(*self.PRODUCT_BRAND).is_displayed()
     
+    def enter_search_product(self):
+        self.driver.find_element(*self.PRODUCT_SEARCH).send_keys("jeans")
+        
+
+    def click_search_button(self):
+        self.driver.find_element(*self.PRODUCT_SEARCH_BUTTON).click()
 
 
+    def is_searched_products_title_visible(self):
+        return self.driver.find_element(*self.SEARCH_PRODUCT_TITLE).is_displayed()
+
+
+    def are_products_matching_search(self, keyword: str) -> bool:
+        products = self.driver.find_elements(*self.PRODUCT_NAMES)
+        assert len(products) > 0, "No products found"
+
+        return any(keyword.lower() in p.text.lower() for p in products)
+
+
+
+
+
+
+       
