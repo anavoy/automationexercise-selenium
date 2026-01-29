@@ -23,6 +23,14 @@ class HomePage(BasePage):
     TEST_CASES_BUTTON = (By.LINK_TEXT, "Test Cases")
     TEST_CASES_TITLE = (By.XPATH, "//h2[contains(text(),'Test Cases')]")
     TEST_CASES_TITLES = (By.CSS_SELECTOR,"div.panel-group a")
+    SUBSCRIPTION_SECTION = (By.XPATH, "//h2[text()='Subscription']")
+    SUBSCRIPTION_TEXT = (
+    By.XPATH,
+    "//div[@class='single-widget']//p[contains(text(),'Get the most recent updates')]")
+    SUBSCRIPTION_EMAIL_INPUT = (By.ID, "susbscribe_email")
+    SUBSCRIPTION_BUTTON = (By.ID, "subscribe")
+    SUBSCRIPTION_MESSAGE = (By.XPATH, "//div[@class='alert-success alert']")
+
 
     def is_home_page_visible(self):
         return "Automation Exercise" in self.get_title()
@@ -73,4 +81,33 @@ class HomePage(BasePage):
             if title not in text:
                 return False
         return True
+        
+    def scroll_to_footer(self):
+        self.driver.execute_script(
+            "window.scrollTo(0, document.body.scrollHeight);"
+    )
+        
+
+    def is_subscription_section_visible(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.SUBSCRIPTION_SECTION)
+        ).is_displayed()
+    
+    def is_subscription_text_visible(self):
+        subscription_element = self.driver.find_element(*self.SUBSCRIPTION_TEXT)
+        return subscription_element.is_displayed()
+    
+    def enter_email_subscription(self):
+        self.driver.find_element(*self.SUBSCRIPTION_EMAIL_INPUT).send_keys("jo@gmail.com")
+
+
+    def click_subscription_button(self):
+        self.driver.find_element(*self.SUBSCRIPTION_BUTTON).click()
+
+
+    def is_subscription_success_message_visible(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.SUBSCRIPTION_MESSAGE)
+        ).is_displayed()
+
         
