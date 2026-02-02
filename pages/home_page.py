@@ -32,8 +32,20 @@ class HomePage(BasePage):
     SUBSCRIPTION_MESSAGE = (By.XPATH, "//div[@class='alert-success alert']")
 
 
+    CHART_BUTTON = (By.LINK_TEXT, "Cart")
+    CHART_PAGE_TITLE = (By.XPATH, "//li[@class='active'][text()='Shopping Cart']")
+
+
     def is_home_page_visible(self):
-        return "Automation Exercise" in self.get_title()
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located(
+                    (By.XPATH, "//img[@alt='Website for automation practice']")
+                )
+            )
+            return True
+        except:
+            return False
 
     def click_signup_login(self):
         self.driver.find_element(*self.SIGNUP_BUTTON).click()
@@ -111,3 +123,15 @@ class HomePage(BasePage):
         ).is_displayed()
 
         
+    def click_cart_button(self):
+        self.driver.find_element(*self.CHART_BUTTON).click()
+
+    
+    def is_cart_page_visible(self):
+        return WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.CHART_PAGE_TITLE)
+        ).is_displayed()
+    
+
+
+

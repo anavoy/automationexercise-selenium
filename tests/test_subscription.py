@@ -1,7 +1,6 @@
 import time
 from pages.home_page import HomePage
 
-
 def test_subscription(driver):
 
     home = HomePage(driver)
